@@ -10,13 +10,25 @@ def read_data():
     animals_data = load_data('animals_data.json')
     output = ''
     for i in range(len(animals_data)):
+        output += '<li class="cards__item">' + "\n"
         try:
-            output += "Name: " + animals_data[i]["name"] + "\n"
-            output += "Diet:" + animals_data[i]["characteristics"]["diet"] + "\n"
-            output += "Location:" + animals_data[i]["locations"][0] + "\n"
-            output += "Type:" + animals_data[i]["characteristics"]["type"] + "\n"
+            output += '<div class="card__title">'+ animals_data[i]["name"] + "</div>\n"
         except (KeyError, IndexError):
             pass
+        output += '<p class="card__text">'
+        try:
+            output += '<strong>Diet:</strong> ' + animals_data[i]["characteristics"]["diet"] + "<br/>\n"
+        except (KeyError, IndexError):
+            pass
+        try:
+            output += '<strong>Location:</strong> ' + animals_data[i]["locations"][0] + "<br/>\n"
+        except (KeyError, IndexError):
+            pass
+        try:
+            output += '<strong>Type:</strong> ' + animals_data[i]["characteristics"]["type"] + "<br/>\n"
+        except (KeyError, IndexError):
+            pass
+        output += '</p>\n</li>' + "\n"
     return output
 
 
