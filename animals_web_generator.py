@@ -1,24 +1,4 @@
-import json
-import requests
-
-
-def load_data(animal):
-  '''
-  Loads a JSON file about animals from api-ninjas.com
-  :param animal: animal family to fetch
-  :return: the content of the JSON file as a list of dictionaries
-'''
-  HEADER = {'X-Api-Key': 'G9QyJcWfkTyDv5FL9jdR6Q==pRFfUbsYWJ4ldFmm'}
-  PARAM = {'name': animal}
-  API_URL = 'https://api.api-ninjas.com/v1/animals'
-
-  result = []
-  response = requests.get(API_URL, headers=HEADER, params=PARAM)
-  if response.status_code == requests.codes.ok:
-      result = response.json()
-  else:
-      print("Error:", response.status_code, response.text)
-  return result
+import data_fetcher
 
 
 def serialize_animal(animal_obj):
@@ -89,7 +69,7 @@ def main():
     :return: HTML page
     '''
     choice = input("Enter a name of an animal: ").capitalize()
-    animals_data  = load_data(choice)
+    animals_data  = data_fetcher.fetch_data(choice)
     if not animals_data:
         new_html = read_html().replace("__REPLACE_ANIMALS_INFO__",
                   f"<li>\n                "
