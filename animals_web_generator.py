@@ -126,17 +126,21 @@ def main():
             print("Wrong input.")'''
     choice = input("Enter a name of an animal: ").capitalize()
     animals_data  = load_data(choice)
-    if animals_data is None:
-        print("There is not such an animal")
+    if not animals_data:
+        new_html = read_html().replace("__REPLACE_ANIMALS_INFO__",
+                  f"<li>\n                "
+                f"<h2 align='center'>The animal {choice} doesn't exist."
+                f"</h2>\n            </li>")
+        print(f"The animal {choice} doesn't exist.")
     else:
         new_html = read_html().replace("__REPLACE_ANIMALS_INFO__",
                                    read_data(animals_data))
-        try:
-            with open("animals.html", "w") as new_html_file:
-                new_html_file.write(new_html)
-        except IOError as e:
-            print(f'WARNING! {e}. Exiting...')
-            exit()
+    try:
+        with open("animals.html", "w") as new_html_file:
+            new_html_file.write(new_html)
+    except IOError as e:
+        print(f'WARNING! {e}. Exiting...')
+        exit()
 
 
 if __name__ == "__main__":
