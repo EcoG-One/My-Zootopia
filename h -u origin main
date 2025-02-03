@@ -1,0 +1,29 @@
+[33mcommit 90b7158fee26b17465b2d4f9cc269d6ad542f33b[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m
+Author: Georgios Oikonomou <ecog@outlook.de>
+Date:   Sun Jan 26 07:37:51 2025 +0100
+
+    final
+
+[33mcommit 5349b457ca154ca19e3ee704c34965414076e7fa[m
+Author: Georgios Oikonomou <ecog@outlook.de>
+Date:   Sat Jan 25 09:48:11 2025 +0100
+
+    improve card item html
+
+[33mcommit 87e50954347b147ffcdbc21a6390436d772bdd4b[m
+Author: Georgios Oikonomou <ecog@outlook.de>
+Date:   Sat Jan 25 07:40:01 2025 +0100
+
+    bring animal data into html
+
+[33mcommit 8a3be8a33cbf0dd966737dbf3add1211978a2d72[m
+Author: Georgios Oikonomou <ecog@outlook.de>
+Date:   Sat Jan 25 07:13:39 2025 +0100
+
+    access data from json file
+
+[33mcommit 96e8c95c80dcf96e4ce7abac1410c8106f3c8b6a[m[33m ([m[1;31morigin/main[m[33m)[m
+Author: Georgios Oikonomou <ecog@outlook.de>
+Date:   Sat Jan 25 06:33:13 2025 +0100
+
+    First commit

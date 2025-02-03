@@ -1,19 +1,29 @@
 import json
+import requests
 
 
-def load_data(file_path):
+def load_data(animal):
   '''
   Loads a JSON file
   :param file_path: the path to the JSON file
   :return: the content of the JSON file as a list of dictionaries
-  '''
-  try:
+
       with open(file_path, "r") as handle:
         data = handle.read()
   except IOError as e:
       print(f'WARNING! {e}. Exiting...')
       exit()
-  return json.loads(data)
+  return json.loads(data)'''
+  HEADER = {'X-Api-Key': 'G9QyJcWfkTyDv5FL9jdR6Q==pRFfUbsYWJ4ldFmm'}
+  PARAM = {'name': animal}
+  API_URL = 'https://api.api-ninjas.com/v1/animals'
+  result = None
+  response = requests.get(API_URL, headers=HEADER, params=PARAM)
+  if response.status_code == requests.codes.ok:
+      result = response.json()
+  else:
+      print("Error:", response.status_code, response.text)
+  return result
 
 
 def serialize_animal(animal_obj):
@@ -43,7 +53,7 @@ def serialize_animal(animal_obj):
         pass
     try:
         output += (f'                  <li><strong>Type:</strong> '
-                   f'{animal_obj["characteristics"]["type"]} </li>\n')
+                   f'{animal_obj["characteristics"]["group"]} </li>\n')
     except (KeyError, IndexError):
         pass
     output += '                </ul>\n              </p>\n            </li>\n'
@@ -64,7 +74,7 @@ def skin_type_list(animals_data):
     return skin_list
 
 
-def read_data(animals_data, skin_choice):
+def read_data(animals_data):
     '''
     Iterates through the animals
     :param animals_data: List of Dictionaries with all the animals and
@@ -75,9 +85,7 @@ def read_data(animals_data, skin_choice):
     '''
     output = ''
     for animal_data in animals_data:
-        if (skin_choice == "All"
-                or skin_choice == animal_data["characteristics"]["skin_type"]):
-            output += serialize_animal(animal_data)
+        output += serialize_animal(animal_data)
     return output
 
 
@@ -103,7 +111,6 @@ def main():
         "animals.html" for the animals with the selected skin_type,
         or all if user chose all.
     :return: HTML page
-    '''
     animals_data = load_data('animals_data.json')
     print("Available skin types are: ")
     for skin in skin_type_list(animals_data):
@@ -116,15 +123,20 @@ def main():
         if choice in skin_type_list(animals_data) or choice == "All":
             break
         else:
-            print("Wrong input.")
-    new_html = read_html().replace("__REPLACE_ANIMALS_INFO__",
-                                   read_data(animals_data, choice))
-    try:
-        with open("animals.html", "w") as new_html_file:
-            new_html_file.write(new_html)
-    except IOError as e:
-        print(f'WARNING! {e}. Exiting...')
-        exit()
+            print("Wrong input.")'''
+    choice = input("Enter a name of an animal: ").capitalize()
+    animals_data  = load_data(choice)
+    if animals_data is None:
+        print("There is not such an animal")
+    else:
+        new_html = read_html().replace("__REPLACE_ANIMALS_INFO__",
+                                   read_data(animals_data))
+        try:
+            with open("animals.html", "w") as new_html_file:
+                new_html_file.write(new_html)
+        except IOError as e:
+            print(f'WARNING! {e}. Exiting...')
+            exit()
 
 
 if __name__ == "__main__":
