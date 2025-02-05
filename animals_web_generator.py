@@ -65,8 +65,9 @@ def read_html():
 def main():
     '''
     Main function: asks the user to enter an animal family,
-    and then, based on the "animals_template.html",
-    generates the webpage "animals.html" for the animals of that family.
+    and then, pools data from "https://api-ninjas.com/api/animals"
+    and based on the "animals_template.html" generates the webpage
+    "animals.html" for the animals family entered by the user.
     :return: HTML page
     '''
     choice = input("Enter a name of an animal: ").capitalize()
@@ -83,6 +84,7 @@ def main():
     try:
         with open("animals.html", "w") as new_html_file:
             new_html_file.write(new_html)
+        print("Website was successfully generated to the file animals.html.")
     except IOError as e:
         print(f'WARNING! {e}. Exiting...')
         exit()
