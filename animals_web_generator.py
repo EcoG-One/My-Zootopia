@@ -37,7 +37,8 @@ def serialize_animal(animal_obj):
 
 def read_data(animals_data):
     '''
-    Iterates through the animals
+    Iterates through the objects of animals_data list, adding them
+        to the HTML using the serialize_animal() function
     :param animals_data: List of Dictionaries with all the animals and
         their properties
     :return: all selected animal data as HTML
@@ -63,7 +64,7 @@ def read_html():
 
 def main():
     '''
-    Main function: asks for the user to enter an animal family,
+    Main function: asks the user to enter an animal family,
     and then, based on the "animals_template.html",
     generates the webpage "animals.html" for the animals of that family.
     :return: HTML page
