@@ -5,7 +5,8 @@ from dotenv import load_dotenv
 
 
 API_URL = 'https://api.api-ninjas.com/v1/animals'
-
+API_KEY = os.getenv('API_KEY')
+HEADER = {'X-Api-Key': API_KEY}
 
 def fetch_data(animal_name):
   """
@@ -35,5 +36,3 @@ def fetch_data(animal_name):
 
 
 load_dotenv()
-API_KEY = os.getenv('API_KEY')
-HEADER = {'X-Api-Key': API_KEY}
